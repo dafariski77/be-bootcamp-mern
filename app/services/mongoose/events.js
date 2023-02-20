@@ -93,14 +93,17 @@ const getOneEvents = async (req) => {
     organizer: req.user.organizer,
   })
     .populate({ path: "image", select: "_id name" })
-    .populate({ path: "category", select: "_id name" })
+    .populate({
+      path: "category",
+      select: "_id name",
+    })
     .populate({
       path: "talent",
       select: "_id name role image",
-      populate: { path: "image", select: "_id name" },
+      populate: { path: "image", select: "_id  name" },
     });
 
-  if (result) throw new NotFoundError(`Tidak ada pembicara dengan id : ${id}`);
+  if (!result) throw new NotFoundError(`Tidak ada acara dengan id :  ${id}`);
 
   return result;
 };

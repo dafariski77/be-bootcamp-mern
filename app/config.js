@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 
 module.exports = {
@@ -6,5 +6,7 @@ module.exports = {
   jwtExpiration: process.env.JWT_EXP,
   jwtSecret: process.env.JWT_SECRET,
   gmail: process.env.GMAIL,
-  password: process.env.PASSWORD
-}
+  password: process.env.PASSWORD,
+  jwtRefreshTokenSecret: process.env.JWT_SECRET_REFRESH_TOKEN,
+  jwtRefreshTokenExpiration: process.env.JWT_EXP_REFRESH_TOKEN,
+};
