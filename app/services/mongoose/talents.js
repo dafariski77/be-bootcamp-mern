@@ -37,7 +37,7 @@ const createTalents = async (req) => {
   const check = await Talents.findOne({ name, organizer: req.user.organizer });
 
   // apabila check true / data talents sudah ada maka kita tampilkan error bad request dengan message pembicara duplikat
-  if (check) throw new BadRequestError("Pembicara sudah terdaftar");
+  if (check) throw new BadRequestError("Talent sudah terdaftar");
 
   const result = await Talents.create({
     name,
@@ -59,7 +59,7 @@ const getOneTalents = async (req) => {
     .populate({ path: "image", select: "_id name" })
     .select("_id name role image");
 
-  if (!result) throw new NotfoundError(`Tidak ada pembicara dengan id : ${id}`);
+  if (!result) throw new NotfoundError(`Tidak ada talent dengan id : ${id}`);
 
   return result;
 };
@@ -80,7 +80,7 @@ const updateTalents = async (req) => {
   });
 
   // apabila check true / data talents sudah ada maka kita tampilkan error bad request dengan message pembicara nama duplikat
-  if (check) throw new BadRequestError("Pembicara nama duplikat");
+  if (check) throw new BadRequestError("Nama Talent duplikat");
 
   const result = await Talents.findOneAndUpdate(
     { _id: id },
@@ -101,7 +101,7 @@ const deleteTalents = async (req) => {
     organizer: req.user.organizer,
   });
 
-  if (!result) throw new NotFoundError(`Tidak ada pembicara dengan id : ${id}`);
+  if (!result) throw new NotFoundError(`Tidak ada Talent dengan id : ${id}`);
 
   await result.remove();
 
@@ -111,7 +111,7 @@ const deleteTalents = async (req) => {
 const checkingTalents = async (id) => {
   const result = await Talents.findOne({ _id: id });
 
-  if (!result) throw new NotFoundError(`Tidak ada pembicara dengan id : ${id}`);
+  if (!result) throw new NotFoundError(`Tidak ada Talent dengan id : ${id}`);
 
   return result;
 };
